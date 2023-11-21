@@ -11,7 +11,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.MONGOdB_URI;
+const mongoDB = process.env.MONGODB_URI;
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -29,7 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
