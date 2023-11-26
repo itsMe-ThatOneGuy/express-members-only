@@ -4,6 +4,12 @@ block content
     h1= title
         if (user)
             p Welcome Back #{user.username}
+            p
+                a(href='/auth/logout') Logout
         else
             p Please Login
+            p
+                a(href='/auth/sign-up') Sign Up
+            p
+                a(href='/auth/login') Login
 
