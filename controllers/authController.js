@@ -23,6 +23,11 @@ exports.sign_up_post = [
 		.withMessage('Password Must Contain an Uppercase Letter')
 		.trim()
 		.escape(),
+	body('confirm-password')
+		.custom((confirmPassword, { req }) => {
+			return req.body.password === confirmPassword;
+		})
+		.withMessage('Passwords do not match'),
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
@@ -30,6 +35,7 @@ exports.sign_up_post = [
 		if (!errors.isEmpty()) {
 			res.render('auth-form', {
 				title: 'Sign Up',
+				username: req.body.username,
 				errors: errors.array(),
 			});
 		} else {
@@ -65,7 +71,8 @@ exports.login_get = asyncHandler(async (req, res, next) => {
 exports.login_post = [
 	passport.authenticate('local', {
 		successRedirect: '/',
-		failureRedirect: '/',
+		failureRedirect: '/auth/login',
+		failureFlash: true,
 	}),
 ];
 

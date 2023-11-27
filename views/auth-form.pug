@@ -5,11 +5,18 @@ block content
 
     form(method='POST' action='')
         div
-            label(for='username') Username
-            input(name='username' placeholder="Username" type='text')
+            p
+                label(for='username') Username: 
+                input(name='username' placeholder="Type Your Username" type='text' required='true' value=(undefined===username ? '' : username) )
         div
-            label(for='password') Password
-            input(name='password' placeholder='Password' type='password')
+            p
+                label(for='password') Password: 
+                input(name='password' placeholder='Type Your Password' type='password' required='true')
+        div
+            p
+                label(for='confirm-password') Confirm Password: 
+                input(name='confirm-password' placeholder='Retype Your Password' type='password' required='true')
+
         div
             button(type='submit') Submit
 
