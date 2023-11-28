@@ -16,9 +16,14 @@ exports.sign_up_post = [
 		.trim()
 		.isLength({ min: 1 })
 		.withMessage('Username must not be empty')
-		.custom(async ({ req }) => {
-			const name = await User.findOne({ username: req.body.username }).exec();
-			if (name === null) return true;
+		.custom(async (value, { req }) => {
+			return User.findOne({ username: value })
+				.exec()
+				.then((name) => {
+					if (name !== null) {
+						return Promise.reject();
+					}
+				});
 		})
 		.withMessage('That Username is Already Taken.')
 		.escape(),
@@ -39,6 +44,9 @@ exports.sign_up_post = [
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
+
+		const name = await User.findOne({ username: req.body.username }).exec();
+		console.log(name);
 
 		if (!errors.isEmpty()) {
 			res.render('auth-form', {
