@@ -68,6 +68,7 @@ exports.sign_up_post = [
 exports.login_get = asyncHandler(async (req, res, next) => {
 	res.render('auth-form', {
 		title: 'Login',
+		message: req.session.messages,
 	});
 });
 
