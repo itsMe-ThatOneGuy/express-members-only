@@ -12,10 +12,12 @@ block content
             p
                 label(for='password') Password: 
                 input(name='password' placeholder='Type Your Password' type='password' required='true')
-        div
-            p
-                label(for='confirm-password') Confirm Password: 
-                input(name='confirm-password' placeholder='Retype Your Password' type='password' required='true')
+
+        if signup
+            div
+                p
+                    label(for='confirm-password') Confirm Password: 
+                    input(name='confirm-password' placeholder='Retype Your Password' type='password' required='true')
 
         div
             button(type='submit') Submit

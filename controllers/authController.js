@@ -7,6 +7,7 @@ const passport = require('passport');
 exports.sign_up_get = asyncHandler(async (req, res, next) => {
 	res.render('auth-form', {
 		title: 'Sign Up',
+		signup: true,
 	});
 });
 
@@ -36,6 +37,7 @@ exports.sign_up_post = [
 			res.render('auth-form', {
 				title: 'Sign Up',
 				username: req.body.username,
+				signup: true,
 				errors: errors.array(),
 			});
 		} else {
@@ -59,6 +61,7 @@ exports.sign_up_post = [
 	passport.authenticate('local', {
 		successRedirect: '/',
 		failureRedirect: '/',
+		failureMessage: true,
 	}),
 ];
 
@@ -72,7 +75,7 @@ exports.login_post = [
 	passport.authenticate('local', {
 		successRedirect: '/',
 		failureRedirect: '/auth/login',
-		failureFlash: true,
+		failureMessage: true,
 	}),
 ];
 
