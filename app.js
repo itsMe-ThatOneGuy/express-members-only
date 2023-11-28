@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('dotenv').config();
 
-const session = require('express-session');
+const session = require('./config/session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -30,7 +30,7 @@ const bcrypt = require('bcryptjs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(session);
 
 app.use(passport.initialize());
 app.use(passport.session());
