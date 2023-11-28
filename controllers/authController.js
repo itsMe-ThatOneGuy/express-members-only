@@ -12,12 +12,19 @@ exports.sign_up_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.sign_up_post = [
-	body('username', 'Username must not be empty')
+	body('username')
 		.trim()
 		.isLength({ min: 1 })
+		.withMessage('Username must not be empty')
+		.custom(async ({ req }) => {
+			const name = await User.findOne({ username: req.body.username }).exec();
+			if (name === null) return true;
+		})
+		.withMessage('That Username is Already Taken.')
 		.escape(),
-	body('password', 'Password must contain at least 8 characters')
+	body('password')
 		.isLength({ min: 8 })
+		.withMessage('Password Must Contain at Least 8 Characters')
 		.matches('[0-9]')
 		.withMessage('Password Must Contain a Number')
 		.matches('[A-Z]')
