@@ -32,26 +32,31 @@ app.set('view engine', 'pug');
 
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 passport.use(
 	new LocalStrategy(async (username, password, done) => {
 		try {
 			const user = await User.findOne({ username: username }).exec();
-			const match = await bcrypt.compare(password, user.password);
 			if (!user) {
 				return done(null, false, { message: 'Incorrect username' });
 			}
-			if (!match) {
+			bcrypt.compare(password, user.password, (err, res) => {
+				if (err) {
+					return done(err);
+				}
+				if (res) {
+					return done(null, user);
+				}
 				return done(null, false, { message: 'Incorrect password' });
-			}
-			return done(null, user);
+			});
 		} catch (err) {
 			return done(err);
 		}
 	}),
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
 passport.serializeUser((user, done) => {
 	done(null, user.id);
 });
