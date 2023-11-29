@@ -9,10 +9,15 @@ block content
         div
             p
                 label(for='title') Title: 
-                input(name='title' placeholder='Message Title' type='text' required='true')
+                input(name='title' placeholder='Message Title' type='text' required='true' value=(undefined===message ? '' : message.title))
         div
             p
                 label(for='message') Message: 
-                textarea( name='message' placeholder='Message Content' required='true')
+                textarea( name='message' placeholder='Message Content' required='true') #{undefined===message ? '' : message.message}
         div
             button(type='submit') Submit
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg
