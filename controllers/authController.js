@@ -42,7 +42,7 @@ exports.sign_up_post = [
 		})
 		.withMessage('Passwords do not match'),
 
-	asyncHandler(async (req, res, next) => {
+	asyncHandler((req, res, next) => {
 		const errors = validationResult(req);
 
 		if (!errors.isEmpty()) {
@@ -77,12 +77,12 @@ exports.sign_up_post = [
 	}),
 ];
 
-exports.login_get = asyncHandler(async (req, res, next) => {
+exports.login_get = (req, res, next) => {
 	res.render('auth-form', {
 		title: 'Login',
 		message: req.session.messages,
 	});
-});
+};
 
 exports.login_post = [
 	passport.authenticate('local', {
