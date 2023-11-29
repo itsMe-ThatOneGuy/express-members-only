@@ -4,12 +4,12 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-exports.sign_up_get = asyncHandler(async (req, res, next) => {
+exports.sign_up_get = (req, res, next) => {
 	res.render('auth-form', {
 		title: 'Sign Up',
 		signup: true,
 	});
-});
+};
 
 exports.sign_up_post = [
 	body('username')
@@ -44,9 +44,6 @@ exports.sign_up_post = [
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
-
-		const name = await User.findOne({ username: req.body.username }).exec();
-		console.log(name);
 
 		if (!errors.isEmpty()) {
 			res.render('auth-form', {
