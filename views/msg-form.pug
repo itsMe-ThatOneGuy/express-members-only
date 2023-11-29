@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1 #{user.username}
+
+    h3 Post a new message
+
+    form(method='POST' action='')
+        div
+            p
+                label(for='title') Title: 
+                input(name='title' placeholder='Message Title' type='text' required='true')
+        div
+            p
+                label(for='message') Message: 
+                textarea( name='message' placeholder='Message Content' required='true')
+        div
+            button(type='submit') Submit
