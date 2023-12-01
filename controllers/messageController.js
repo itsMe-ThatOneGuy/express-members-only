@@ -3,6 +3,15 @@ const User = require('../models/users');
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
+exports.msg_list = asyncHandler(async (req, res, next) => {
+	const allMessages = await Message.find({})
+		.sort({ postDate: -1 })
+		.populate('user')
+		.exec();
+
+	res.render('index', { user: req.user, messages: allMessages });
+});
+
 exports.msg_form_get = (req, res, next) => {
 	console.log(req.user);
 	res.render('msg-form', {
@@ -19,7 +28,6 @@ exports.msg_form_post = [
 	body('message')
 		.trim()
 		.isLength({ min: 1 })
-		.escape()
 		.withMessage('Message Must Not be Empty'),
 
 	asyncHandler(async (req, res, next) => {
