@@ -5,11 +5,15 @@ block content
         if (user)
             p Welcome Back #{user.username}
             p
-                a(href='/auth/logout') Logout
-        else
-            p Please Login
-            p
-                a(href='/auth/sign-up') Sign Up
-            p
-                a(href='/auth/login') Login
+                a(href='/message/create') Post a New Message
 
+        div
+            each message in messages
+                hr
+                div
+                    p #[strong !{message.title}]
+                    p #{message.message}
+
+                    if (user && (user.isMember || user.isAdmin))
+                        p #{message.user.username}
+                    p #{message.postDate}
