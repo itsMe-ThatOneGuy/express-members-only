@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const messageController = require('../controllers/messageController');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-	res.render('index', { user: req.user });
-});
+router.get('/', messageController.msg_list);
 
 module.exports = router;
