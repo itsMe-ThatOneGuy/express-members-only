@@ -16,4 +16,11 @@ block content
 
                     if (user && (user.isMember || user.isAdmin))
                         p #{message.user.username}
-                    p #{message.postDate}
+
+                    p #{message.postDate_formatted}
+
+                    if (user && user.isAdmin)
+                        p
+                            button Delete
+
+
