@@ -9,6 +9,10 @@ const MessageSchema = new Schema({
 	postDate: { type: Date, default: Date.now },
 });
 
+MessageSchema.virtual('url').get(function () {
+	return `/message/${this._id}`;
+});
+
 MessageSchema.virtual('postDate_formatted').get(function () {
 	return this.postDate
 		? DateTime.fromJSDate(this.postDate).toLocaleString(DateTime.DATETIME_SHORT)
