@@ -28,6 +28,7 @@ exports.msg_form_post = [
 	body('message')
 		.trim()
 		.isLength({ min: 1 })
+		.escape()
 		.withMessage('Message Must Not be Empty'),
 
 	asyncHandler(async (req, res, next) => {
@@ -55,3 +56,15 @@ exports.msg_form_post = [
 		}
 	}),
 ];
+
+exports.msg_delete_get = asyncHandler(async (req, res, next) => {
+	const message = await Message.findById(req.params.id).populate('user').exec();
+
+	if (message === null) {
+		res.redirect('/');
+	}
+
+	res.render('msg-delete', {
+		message: message,
+	});
+});
