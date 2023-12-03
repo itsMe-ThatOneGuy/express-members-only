@@ -8,4 +8,6 @@ router.post('/create', msgController.msg_form_post);
 
 router.get('/:id/delete', msgController.msg_delete_get);
 
+router.post('/:id/delete', msgController.msg_delete_post);
+
 module.exports = router;

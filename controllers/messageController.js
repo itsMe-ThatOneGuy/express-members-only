@@ -59,12 +59,24 @@ exports.msg_form_post = [
 
 exports.msg_delete_get = asyncHandler(async (req, res, next) => {
 	const message = await Message.findById(req.params.id).populate('user').exec();
-
+	console.log(message);
 	if (message === null) {
-		res.redirect('/');
+		res.redirect('/', { user: req.user });
 	}
 
 	res.render('msg-delete', {
+		user: req.user,
 		message: message,
 	});
+});
+
+exports.msg_delete_post = asyncHandler(async (req, res, next) => {
+	const message = Message.findById(req.params.id).populate('user').exec();
+
+	if (message === null || req.user === undefined) {
+		res.redirect('/');
+	}
+
+	await Message.findByIdAndDelete(req.params.id);
+	res.redirect('/');
 });
