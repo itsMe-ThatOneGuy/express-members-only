@@ -4,6 +4,10 @@ block content
     h1= title
         if (user)
             p Welcome Back #{user.username}
+
+            if (!user.isMember)
+                p
+                    a(href='/user/membership') Become a Member
             p
                 a(href='/message/create') Post a New Message
 
