@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1 Membership Application
+
+    form(method='POST' action='')
+        div
+            p
+                label(for='passphrase') Passphrase: 
+                input(name='passphrase' placeholder='Provide the Passphrase' required='true')
+        div
+            button(type='submit') Submit
+
+    div
+        if errors
+            ul
+                for error in errors
+                    li!= error.msg
+
+    div
+        p
+            a(href=('/')) Return to Homepage
