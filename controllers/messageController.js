@@ -13,7 +13,10 @@ exports.msg_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.msg_form_get = (req, res, next) => {
-	console.log(req.user);
+	if (req.user === undefined) {
+		res.redirect('/');
+	}
+
 	res.render('msg-form', {
 		user: req.user,
 	});
@@ -49,7 +52,6 @@ exports.msg_form_post = [
 				message: message,
 				errors: errors.array(),
 			});
-			return;
 		} else {
 			await message.save();
 			res.redirect('/');
@@ -59,7 +61,6 @@ exports.msg_form_post = [
 
 exports.msg_delete_get = asyncHandler(async (req, res, next) => {
 	const message = await Message.findById(req.params.id).populate('user').exec();
-	console.log(message);
 	if (message === null) {
 		res.redirect('/', { user: req.user });
 	}
