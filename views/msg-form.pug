@@ -16,8 +16,12 @@ block content
                 textarea( name='message' placeholder='Message Content' required='true') #{undefined===message ? '' : message.message}
         div
             button(type='submit') Submit
+    div
+        if errors
+            ul
+                for error in errors
+                    li!= error.msg
 
-    if errors
-        ul
-            for error in errors
-                li!= error.msg
+    div
+        p
+            a(href=('/')) Return to Homepage
