@@ -16,7 +16,10 @@ exports.membership_post = [
 		.isLength({ min: 1 })
 		.withMessage('Passphrase Must Not be Empty')
 		.custom((value) => {
-			return value === process.env.PASSPHRASE;
+			return (
+				value === process.env.PASSPHRASE_MEMBER ||
+				value === process.env.PASSPHRASE_ADMIN
+			);
 		})
 		.withMessage('Passphrase Did Not Match'),
 
@@ -29,8 +32,13 @@ exports.membership_post = [
 				errors: errors.array(),
 			});
 		} else {
-			await User.findByIdAndUpdate(req.user._id, { isMember: true });
-			res.redirect('/');
+			if (req.body.passphrase === process.env.PASSPHRASE_MEMBER) {
+				await User.findByIdAndUpdate(req.user._id, { isMember: true });
+				res.redirect('/');
+			} else if (req.body.passphrase === process.env.PASSPHRASE_ADMIN) {
+				await User.findByIdAndUpdate(req.user._id, { isAdmin: true });
+				res.redirect('/');
+			}
 		}
 	}),
 ];
