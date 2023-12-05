@@ -1,7 +1,8 @@
 extends layout
 
 block content
-    h1 Delete Message
+    div
+        h1 Delete Message
 
     div
         p #[strong !{message.title}]
@@ -18,3 +19,7 @@ block content
             input(type='hidden', name='id', required='true', value=message._id)
 
         button(type='submit') Delete
+
+    div
+        p
+            a(href=('/')) Return to Homepage
