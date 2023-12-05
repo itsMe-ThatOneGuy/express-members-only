@@ -6,7 +6,6 @@ exports.membership_get = (req, res, next) => {
 	if (req.user === undefined) {
 		res.redirect('/');
 	}
-	console.log(`log 1: ${req.user}`);
 	res.render('membership-form', { user: req.user });
 };
 
@@ -17,8 +16,8 @@ exports.membership_post = [
 		.withMessage('Passphrase Must Not be Empty')
 		.custom((value) => {
 			return (
-				value === process.env.PASSPHRASE_MEMBER ||
-				value === process.env.PASSPHRASE_ADMIN
+				value.toLowerCase() === process.env.PASSPHRASE_MEMBER ||
+				value.toLowerCase() === process.env.PASSPHRASE_ADMIN
 			);
 		})
 		.withMessage('Passphrase Did Not Match'),
@@ -32,10 +31,12 @@ exports.membership_post = [
 				errors: errors.array(),
 			});
 		} else {
-			if (req.body.passphrase === process.env.PASSPHRASE_MEMBER) {
+			if (req.body.passphrase.toLowerCase() === process.env.PASSPHRASE_MEMBER) {
 				await User.findByIdAndUpdate(req.user._id, { isMember: true });
 				res.redirect('/');
-			} else if (req.body.passphrase === process.env.PASSPHRASE_ADMIN) {
+			} else if (
+				req.body.passphrase.toLowerCase() === process.env.PASSPHRASE_ADMIN
+			) {
 				await User.findByIdAndUpdate(req.user._id, { isAdmin: true });
 				res.redirect('/');
 			}
