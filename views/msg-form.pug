@@ -1,9 +1,10 @@
 extends layout
 
 block content
-    h1 #{user.username}
+    div
+        h1 #{user.username}
 
-    h3 Post a new message
+        h3 Post a new message
 
     form(method='POST' action='')
         div

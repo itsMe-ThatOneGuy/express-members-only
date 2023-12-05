@@ -1,25 +1,25 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    header
-        nav
-            ul
-                if user
-                    li
-                        p #{user.username}
-                    li
-                        p
-                            a(href='/auth/logout') Logout
-                else
-                    li
-                        p
-                            a(href='/auth/sign-up') Sign Up
-                    li
-                        p
-                            a(href='/auth/login') Login
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        header
+            nav
+                ul
+                    if user
+                        li
+                            p #{user.username}
+                        li
+                            p
+                                a(href='/auth/logout') Logout
+                    else
+                        li
+                            p
+                                a(href='/auth/sign-up') Sign Up
+                        li
+                            p
+                                a(href='/auth/login') Login
 
         
     block content
