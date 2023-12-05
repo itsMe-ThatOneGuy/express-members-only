@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
 	user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-	title: { type: String, required: true },
-	message: { type: String, required: true },
+	title: { type: String, minLength: 1, required: true },
+	message: { type: String, minLength: 1, maxLength: 255, required: true },
 	postDate: { type: Date, default: Date.now },
 });
 

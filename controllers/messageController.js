@@ -32,7 +32,9 @@ exports.msg_form_post = [
 		.trim()
 		.isLength({ min: 1 })
 		.escape()
-		.withMessage('Message Must Not be Empty'),
+		.withMessage('Message Must Not be Empty')
+		.isLength({ max: 255 })
+		.withMessage('Message Can Not be Longer Than 255 Characters'),
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
