@@ -1,19 +1,27 @@
 extends layout
 
 block content
-    h1= title
-        if (user)
-            p Welcome Back #{user.username}
+    div
+        h1 Members Only!
 
-            if (!user.isMember && !user.isAdmin)
+    div
+        div
+            if (user)
+                p Welcome Back #{user.username}
+
+                if (!user.isMember && !user.isAdmin)
+                    p
+                        a(href='/user/membership') Become a Member
                 p
-                    a(href='/user/membership') Become a Member
-            p
-                a(href='/message/create') Post a New Message
+                    a(href='/message/create') Post a New Message
+            else 
+                p Signup to make posts.
+                p Become a member to see usernames on posts.
 
         div
             each message in messages
                 hr
+
                 div
                     p #[strong !{message.title}]
                     p #{message.message}
