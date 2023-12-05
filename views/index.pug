@@ -5,7 +5,7 @@ block content
         if (user)
             p Welcome Back #{user.username}
 
-            if (!user.isMember)
+            if (!user.isMember && !user.isAdmin)
                 p
                     a(href='/user/membership') Become a Member
             p
