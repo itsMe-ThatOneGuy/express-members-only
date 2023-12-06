@@ -1,8 +1,165 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	color: #101935;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font:
+		16px 'Lucida Grande',
+		Helvetica,
+		Arial,
+		sans-serif;
+	background: linear-gradient(to bottom right, #564787 0%, #dbcbd8 72%);
+}
+
+header {
+	margin: 10px;
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.li-link {
+	list-style-type: none;
+}
+
+.nav-control {
+	min-width: 25vw;
+	display: flex;
+	justify-content: space-around;
+}
+
+.nav-control > li {
+	padding-right: 5px;
+	margin-right: 10px;
+}
+
+.page-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.page-info {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.page-info:first-child {
+	text-align: center;
+}
+
+.page-explanation {
+	padding: 10px;
+}
+
+.message-list {
+	display: flex;
+	justify-content: center;
+}
+
+.message-container {
+	background: #9ad4d6;
+	margin: 20px auto 20px auto;
+	border: 2px solid black;
+	border-radius: 9px;
+	box-shadow:
+		rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+		rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+	width: 75vw;
+	display: flex;
+	flex-direction: column;
+}
+
+.message-content {
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.message-title {
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.message-info {
+	border-top: 2px solid black;
+	padding: 10px;
+	margin-bottom: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.message-controls {
+	padding-bottom: 10px;
+	text-align: center;
+	width: 100%;
+}
+
+button {
+	width: 10rem;
+	height: 2.5rem;
+	font-size: 1.5rem;
+}
+
+.delete-button > a {
+	color: black;
+	text-decoration: none;
+}
+
+.page-title {
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.normal-form {
+	background: #9ad4d6;
+	padding-top: 5px;
+	border: 2px solid black;
+	border-radius: 9px;
+	box-shadow:
+		rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+		rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+	margin: auto;
+	width: 50vw;
+}
+
+.form-controller {
+	padding: 10px;
+}
+
+.form-errors {
+	margin-top: 15px;
+}
+
+.link {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+#footer {
+	display: flex;
+	justify-content: center;
+	margin-top: auto;
+}
+
+.github-icon {
+	width: 30px;
+	height: 30px;
+	margin: 0px 10px;
 }
 
 a {
-  color: #00B7FF;
+	color: #f2fdff;
+}
+
+a:hover {
+	color: #9ad4d6;
 }
