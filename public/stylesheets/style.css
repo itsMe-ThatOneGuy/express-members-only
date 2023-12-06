@@ -21,7 +21,7 @@ body {
 
 header {
 	margin: 15px;
-	padding: 5px;
+	padding: 3px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -29,6 +29,7 @@ header {
 .title {
 	padding: 5px;
 	background: #9ad4d6;
+	border: 2px solid black;
 	border-radius: 9px;
 }
 
