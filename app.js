@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('dotenv').config();
 const helmet = require('helmet');
+const compression = require('compression');
 
 const session = require('./config/session');
 const passport = require('passport');
@@ -16,7 +17,7 @@ const msgRouter = require('./routes/msg');
 const userRouter = require('./routes/user');
 
 const app = express();
-
+app.use(compression());
 app.use(helmet());
 app.disable('x-powered-by');
 
