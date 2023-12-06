@@ -27,7 +27,10 @@ exports.msg_form_post = [
 		.trim()
 		.isLength({ min: 1 })
 		.escape()
-		.withMessage('Title Must Not be Empty'),
+		.withMessage('Title Must Not be Empty')
+		.isLength({ max: 55 })
+		.escape()
+		.withMessage('Title Must Not be Longer Than 55'),
 	body('message')
 		.trim()
 		.isLength({ min: 1 })
