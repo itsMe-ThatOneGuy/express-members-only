@@ -10,7 +10,7 @@ const expressSession = require('express-session');
 
 const session = require('./config/session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const passportInit = require('./config/passport');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -40,47 +40,9 @@ app.set('view engine', 'pug');
 
 app.use(expressSession(session));
 
+passportInit(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.use(
-	new LocalStrategy(
-		{ passReqToCallback: true },
-		async (req, username, password, done) => {
-			try {
-				const user = await User.findOne({ username: username }).exec();
-				if (!user) {
-					req.session.messages = [];
-					return done(null, false, { message: 'Incorrect username' });
-				}
-				bcrypt.compare(password, user.password, (err, res) => {
-					if (err) {
-						return done(err);
-					}
-					if (res) {
-						return done(null, user);
-					}
-					req.session.messages = [];
-					return done(null, false, { message: 'Incorrect password' });
-				});
-			} catch (err) {
-				return done(err);
-			}
-		},
-	),
-);
-
-passport.serializeUser((user, done) => {
-	done(null, user.id);
-});
-passport.deserializeUser(async (id, done) => {
-	try {
-		const user = await User.findById(id).exec();
-		done(null, user);
-	} catch (err) {
-		done(err);
-	}
-});
 
 app.use(logger('dev'));
 app.use(express.json());
