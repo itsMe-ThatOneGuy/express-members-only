@@ -8,7 +8,7 @@ block content
         form.normal-form(method='POST' action='')
             div.form-controller
                 p
-                    label(for='passphrase') Passphrase: 
+                    label(for='passphrase') #[strong Passphrase:] 
                     input(name='passphrase' placeholder='Provide the Passphrase' required='true')
             div.form-controller
                 button(type='submit') Submit
@@ -19,6 +19,6 @@ block content
                     for error in errors
                         li!= error.msg
 
-        div.link
+        div.form-controller
             p
                 a(href=('/')) Return to Homepage

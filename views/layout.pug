@@ -17,14 +17,14 @@ html
                             p #[strong !{user.username}]
                         li
                             p
-                                a(href='/auth/logout') Logout
+                                a(href='/auth/logout') #[strong Logout]
                     else
                         li
                             p
-                                a(href='/auth/sign-up') Sign Up
+                                a(href='/auth/sign-up') #[strong Sign Up]
                         li
                             p
-                                a(href='/auth/login') Login
+                                a(href='/auth/login') #[strong Login]
     main.page-container
         block content
     block foot

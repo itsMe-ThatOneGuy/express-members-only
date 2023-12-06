@@ -8,11 +8,11 @@ block content
         form.normal-form(method='POST' action='')
             div.form-controller
                 p
-                    label(for='title') Title: 
+                    label(for='title') #[strong Title:] 
                     input(name='title' placeholder='Message Title' type='text' required='true' value=(undefined===message ? '' : message.title))
             div.form-controller
                 p
-                    label(for='message') Message: 
+                    label(for='message') #[strong Message:] 
                     textarea( name='message' placeholder='Message Content' required='true') #{undefined===message ? '' : message.message}
             div.form-controller
                 button(type='submit') Submit

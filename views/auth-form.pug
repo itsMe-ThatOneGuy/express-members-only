@@ -8,17 +8,17 @@ block content
         form.normal-form(method='POST' action='')
             div.form-controller
                 p
-                    label(for='username') Username: 
+                    label(for='username') #[strong Username:] 
                     input(name='username' placeholder="Type Your Username" type='text' required='true' value=(undefined===username ? '' : username) )
             div.form-controller
                 p
-                    label(for='password') Password: 
+                    label(for='password') #[strong Password:] 
                     input(name='password' placeholder='Type Your Password' type='password' required='true')
 
             if signup
                 div.form-controller
                     p
-                        label(for='confirm-password') Confirm Password: 
+                        label(for='confirm-password') #[strong Confirm Password:] 
                         input(name='confirm-password' placeholder='Retype Your Password' type='password' required='true')
 
             div.form-controller
@@ -36,4 +36,4 @@ block content
 
         div.link
             p
-                a(href=('/')) Return to Homepage
+                a(href=('/')) #[strong Return to Homepage]
