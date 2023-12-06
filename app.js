@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('dotenv').config();
+const helmet = require('helmet');
 
 const session = require('./config/session');
 const passport = require('passport');
@@ -15,6 +16,9 @@ const msgRouter = require('./routes/msg');
 const userRouter = require('./routes/user');
 
 const app = express();
+
+app.use(helmet());
+app.disable('x-powered-by');
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
