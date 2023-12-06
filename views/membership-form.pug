@@ -17,8 +17,8 @@ block content
             if errors
                 ul
                     for error in errors
-                        li!= error.msg
+                        li #[strong !{error.msg}]
 
         div.form-controller
             p
-                a(href=('/')) Return to Homepage
+                a(href=('/')) #[strong Return to Homepage]
