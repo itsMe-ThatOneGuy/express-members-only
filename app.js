@@ -6,6 +6,7 @@ const logger = require('morgan');
 require('dotenv').config();
 const helmet = require('helmet');
 const compression = require('compression');
+const expressSession = require('express-session');
 
 const session = require('./config/session');
 const passport = require('passport');
@@ -37,7 +38,7 @@ const bcrypt = require('bcryptjs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(session);
+app.use(expressSession(session));
 
 app.use(passport.initialize());
 app.use(passport.session());
