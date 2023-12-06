@@ -2,38 +2,35 @@ extends layout
 
 block content
     div
-        h1 Members Only!
+        div.page-info
+            div.page-title
+                if (user)
+                    h1.page-explanation Welcome Back #{user.username}
 
-    div
-        div
-            if (user)
-                p Welcome Back #{user.username}
+                    if (!user.isMember && !user.isAdmin)
+                        h2.page-explanation
+                            a(href='/user/membership') Become a Member
+                    h2.page-explanation
+                        a(href='/message/create') Post a New Message
+                else 
+                    h2.page-explanation Signup to make posts.
+                    h2.page-explanation Become a member to see usernames on posts.
 
-                if (!user.isMember && !user.isAdmin)
-                    p
-                        a(href='/user/membership') Become a Member
-                p
-                    a(href='/message/create') Post a New Message
-            else 
-                p Signup to make posts.
-                p Become a member to see usernames on posts.
+        div.message-list
+            div
+                each message in messages
+                    div.message-container
+                        div.message-content
+                            h2.message-title #[strong !{message.title}]
+                            p #{message.message}
 
-        div
-            each message in messages
-                hr
+                        div.message-info
+                            if (user && (user.isMember || user.isAdmin))
+                                p #[strong !{message.user.username}]
 
-                div
-                    p #[strong !{message.title}]
-                    p #{message.message}
+                            p #{message.postDate_formatted}
 
-                    if (user && (user.isMember || user.isAdmin))
-                        p #{message.user.username}
-
-                    p #{message.postDate_formatted}
-
-                    if (user && user.isAdmin)
-                        p
-                            a(href=(message.url+'/delete'))
-                                button Delete
-
-
+                        div.message-controls
+                            if (user && user.isAdmin)
+                                a(href=(message.url+'/delete'))
+                                    button.delete-button Delete

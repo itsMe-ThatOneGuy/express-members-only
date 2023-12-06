@@ -1,15 +1,20 @@
 doctype html
 html
     head
-        title= title
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title Members Only
         link(rel='stylesheet', href='/stylesheets/style.css')
     body
         header
+            div.title
+                h1 Members Only!
             nav
-                ul
+                ul.nav-control.li-link
                     if user
                         li
-                            p #{user.username}
+                            p #[strong !{user.username}]
                         li
                             p
                                 a(href='/auth/logout') Logout
@@ -20,6 +25,11 @@ html
                         li
                             p
                                 a(href='/auth/login') Login
-
-        
-    block content
+    main.page-container
+        block content
+    block foot
+        footer#footer
+            p Copyright © 2023
+            a(href='https://github.com/itsMe-ThatOneGuy' targe='_blank') 
+                img.github-icon(src='images/github-mark.png')
+            p itsMe-ThatOneGuy

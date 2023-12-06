@@ -1,23 +1,24 @@
 extends layout
 
 block content
-    div
-        h1 Membership Application
+    div.page-info
+        div.page-title
+            h1 Membership Application
 
-    form(method='POST' action='')
-        div
+        form.normal-form(method='POST' action='')
+            div.form-controller
+                p
+                    label(for='passphrase') Passphrase: 
+                    input(name='passphrase' placeholder='Provide the Passphrase' required='true')
+            div.form-controller
+                button(type='submit') Submit
+
+        div.form-errors
+            if errors
+                ul
+                    for error in errors
+                        li!= error.msg
+
+        div.link
             p
-                label(for='passphrase') Passphrase: 
-                input(name='passphrase' placeholder='Provide the Passphrase' required='true')
-        div
-            button(type='submit') Submit
-
-    div
-        if errors
-            ul
-                for error in errors
-                    li!= error.msg
-
-    div
-        p
-            a(href=('/')) Return to Homepage
+                a(href=('/')) Return to Homepage

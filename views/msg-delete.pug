@@ -1,25 +1,28 @@
 extends layout
 
 block content
-    div
-        h1 Delete Message
+    div.page-info
+        div.page-title
+            h1 Delete Message
 
-    div
-        p #[strong !{message.title}]
-        p #{message.message}
+        div.message-container
+            div.messag-content
+                h2.message-title #[strong !{message.title}]
+                p #{message.message}
+           
+            div.message-info
+                p #[strong !{message.user.username}]
+                p #{message.postDate_formatted}
 
-        p #{message.username}
-        p #{message.postDate_formatted}
-
-    div
-        p Are You Sure You Want to Delete This Message?
-
-    form(method='POST' action='')
         div
-            input(type='hidden', name='id', required='true', value=message._id)
+            p Are You Sure You Want to Delete This Message?
 
-        button(type='submit') Delete
+        form(method='POST' action='')
+            div.form-controller
+                input(type='hidden', name='id', required='true', value=message._id)
 
-    div
-        p
-            a(href=('/')) Return to Homepage
+            button.delete-button(type='submit') Delete
+
+        div.link
+            p
+                a(href=('/')) Return to Homepage

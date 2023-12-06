@@ -1,36 +1,39 @@
 extends layout
 
 block content
-    div
-        h1= title
+    div.page-info
+        div.page-title
+            h1= title
 
-    form(method='POST' action='')
-        div
-            p
-                label(for='username') Username: 
-                input(name='username' placeholder="Type Your Username" type='text' required='true' value=(undefined===username ? '' : username) )
-        div
-            p
-                label(for='password') Password: 
-                input(name='password' placeholder='Type Your Password' type='password' required='true')
-
-        if signup
-            div
+        form.normal-form(method='POST' action='')
+            div.form-controller
                 p
-                    label(for='confirm-password') Confirm Password: 
-                    input(name='confirm-password' placeholder='Retype Your Password' type='password' required='true')
+                    label(for='username') Username: 
+                    input(name='username' placeholder="Type Your Username" type='text' required='true' value=(undefined===username ? '' : username) )
+            div.form-controller
+                p
+                    label(for='password') Password: 
+                    input(name='password' placeholder='Type Your Password' type='password' required='true')
 
-        div
-            button(type='submit') Submit
+            if signup
+                div.form-controller
+                    p
+                        label(for='confirm-password') Confirm Password: 
+                        input(name='confirm-password' placeholder='Retype Your Password' type='password' required='true')
 
-    if errors
-        ul
-            for error in errors
-                li!= error.msg
+            div.form-controller
+                button(type='submit') Submit
 
-    if message
-        p #[strong !{message}]
+        if errors
+            div.form-errors
+                ul
+                    for error in errors
+                        li!= error.msg
 
-    div
-        p
-            a(href=('/')) Return to Homepage
+        if message
+            div.form-errors
+                p #[strong !{message}]
+
+        div.link
+            p
+                a(href=('/')) Return to Homepage
