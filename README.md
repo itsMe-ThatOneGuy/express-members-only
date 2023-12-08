@@ -1,12 +1,26 @@
 # Members Only
 
-A more advanced public message board allowing users to create a username and password before posting a message.
+![Screenshot](./public/images/members-only.PNG)
+
+A more advanced public message board allowing users to create an account before posting a message.
 Anyone can see a message posted, but only members can see see the username of who posted the message.
-Once someone has created their account and logged into the site, they can apply for membership by entering a passphrase provided to them.
+Admins can see username of who posted a message, as well as delete any undesirable messages.
+
+**Membership Passphrase** `cats`
 
 ## [Live Preview](https://express-members-only.fly.dev/)
 
 Hosted using [Fly.io](https://fly.io/)
+
+### features
+
+- create / read public messages.
+- user authentication with passportjs using express-session for persistence.
+- user authorization / permissions management.
+- secured passwords using bcryptjs.
+- membership by entering passphrase.
+- database storage via mongodb
+- schema validation using mongoose.
 
 ## Getting Started
 
