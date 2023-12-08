@@ -52,7 +52,6 @@ module.exports = function (passport) {
 				} else {
 					try {
 						const user = await User.findOne({ username: username }).exec();
-						console.log(user);
 						if (user) {
 							if (await testPassword(password, user.password)) {
 								//VALID USER AND PASSWORD
@@ -66,7 +65,6 @@ module.exports = function (passport) {
 										);
 									} catch (err) {}
 								}
-								console.log('P1: USER: VALID - PASSWORD: VALID');
 								req.session.messages = [];
 								return done(null, user);
 								//
@@ -79,7 +77,6 @@ module.exports = function (passport) {
 										),
 										limiterSlowBruteByIP.consume(req.ip),
 									]);
-									console.log('P2: USER: VALID - PASSWORD: WRONG');
 									req.session.messages = [];
 									return done(null, false, {
 										message: 'Incorrect Username or Password',
@@ -88,7 +85,6 @@ module.exports = function (passport) {
 									if (rlRejected instanceof Error) {
 										throw rlRejected;
 									} else {
-										console.log('P3: TOO MANY FAILED ATTEMPTS?');
 										req.session.messages = [];
 										return done(null, false, {
 											message: `Retry-After ${
@@ -106,7 +102,6 @@ module.exports = function (passport) {
 									limiterConsecutiveFailsByUsernameAndIP.consume(usernameIPkey),
 									limiterSlowBruteByIP.consume(req.ip),
 								]);
-								console.log('U1: USER: WRONG - PASSWORD: SKIPPED');
 								req.session.messages = [];
 								return done(null, false, {
 									message: 'Incorrect Username or Password',
@@ -115,7 +110,6 @@ module.exports = function (passport) {
 								if (rlRejected instanceof Error) {
 									throw rlRejected;
 								} else {
-									console.log('U2: TOO MANY FAILED ATTEMPTS?');
 									req.session.messages = [];
 									return done(null, false, {
 										message: `Too Many Failed Attempts. Retry-After ${

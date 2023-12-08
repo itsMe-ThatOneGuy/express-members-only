@@ -38,8 +38,6 @@ app.set('view engine', 'pug');
 app.set('trust proxy', 1);
 app.use(expressSession(sessionInit(app.get('env'))));
 
-console.log(sessionInit(app.get('env')));
-
 passportInit(passport);
 app.use(passport.initialize());
 app.use(passport.session());
