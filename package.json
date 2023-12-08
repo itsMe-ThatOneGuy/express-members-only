@@ -29,6 +29,7 @@
 		"rate-limiter-flexible": "^3.0.4"
 	},
 	"devDependencies": {
+		"@flydotio/dockerfile": "^0.4.11",
 		"nodemon": "^3.0.1"
 	}
 }
