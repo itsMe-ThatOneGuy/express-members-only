@@ -31,9 +31,6 @@ async function main() {
 	await mongoose.connect(mongoDB);
 }
 
-const User = require('./models/users');
-const bcrypt = require('bcryptjs');
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
