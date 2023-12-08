@@ -1,6 +1,4 @@
 const MongoStore = require('connect-mongo');
-const express = require('express');
-const app = express();
 
 const expiration = new Date(Date.now() + 60 * 60 * 1000);
 
@@ -15,12 +13,9 @@ const session = {
 	cookie: {
 		httpOnly: true,
 		expires: expiration,
-		sameSite: true,
+		secure: process.env.NODE_ENV !== 'production' ? 'auto' : true,
+		sameSite: process.env.NODE_ENV !== 'production' ? 'lax' : 'none',
 	},
 };
-
-if (app.get('env') === 'production') {
-	session.cookie.secure = true;
-}
 
 module.exports = session;
