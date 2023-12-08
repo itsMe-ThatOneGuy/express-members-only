@@ -1,12 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const User = require('../models/users');
-const {
-	maxConsecutiveFailsByUsernameAndIP,
-	maxWrongAttemptsByIPperDay,
-	limiterConsecutiveFailsByUsernameAndIP,
-	limiterSlowBruteByIP,
-} = require('./rateLimit');
+const limiterInit = require('./rateLimit');
 
 async function testPassword(password, hashed) {
 	const match = await bcrypt.compare(password, hashed);
@@ -23,6 +18,13 @@ module.exports = function (passport) {
 		new LocalStrategy(
 			{ passReqToCallback: true },
 			async (req, username, password, done) => {
+				const {
+					maxConsecutiveFailsByUsernameAndIP,
+					maxWrongAttemptsByIPperDay,
+					limiterSlowBruteByIP,
+					limiterConsecutiveFailsByUsernameAndIP,
+				} = await limiterInit();
+
 				const usernameIPkey = `${username}_${req.ip}`;
 
 				const [resUsernameAndIP, resSlowByIP] = await Promise.all([
@@ -54,7 +56,6 @@ module.exports = function (passport) {
 						const user = await User.findOne({ username: username }).exec();
 						if (user) {
 							if (await testPassword(password, user.password)) {
-								//VALID USER AND PASSWORD
 								if (
 									resUsernameAndIP !== null &&
 									resUsernameAndIP.consumedPoints > 0
@@ -69,7 +70,6 @@ module.exports = function (passport) {
 								return done(null, user);
 								//
 							} else {
-								//VALID USER WRONG PASSWORD
 								try {
 									await Promise.all([
 										limiterConsecutiveFailsByUsernameAndIP.consume(
@@ -96,7 +96,6 @@ module.exports = function (passport) {
 								//
 							}
 						} else {
-							//WRONG USER
 							try {
 								await Promise.all([
 									limiterConsecutiveFailsByUsernameAndIP.consume(usernameIPkey),
@@ -118,7 +117,6 @@ module.exports = function (passport) {
 									});
 								}
 							}
-							//
 						}
 					} catch (err) {
 						return done(err);
