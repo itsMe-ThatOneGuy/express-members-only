@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const expressSession = require('express-session');
 
-const session = require('./config/session');
+const sessionInit = require('./config/session');
 const passport = require('passport');
 const passportInit = require('./config/passport');
 
@@ -35,7 +35,10 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(expressSession(session));
+app.set('trust proxy', 1);
+app.use(expressSession(sessionInit(app.get('env'))));
+
+console.log(sessionInit(app.get('env')));
 
 passportInit(passport);
 app.use(passport.initialize());
