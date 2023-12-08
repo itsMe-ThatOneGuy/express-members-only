@@ -4,7 +4,7 @@ A more advanced public message board allowing users to create a username and pas
 Anyone can see a message posted, but only members can see see the username of who posted the message.
 Once someone has created their account and logged into the site, they can apply for membership by entering a passphrase provided to them.
 
-## [Live Preview] (https://express-members-only.fly.dev/)
+## [Live Preview](https://express-members-only.fly.dev/)
 
 Hosted using [Fly.io](https://fly.io/)
 
