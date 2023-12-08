@@ -24,7 +24,10 @@ app.disable('x-powered-by');
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.MONGODB_URI;
+const mongoDB =
+	app.get('env') !== 'production'
+		? process.env.MONGODB_URI_DEV
+		: process.env.MONGODB_URI;
 
 main().catch((err) => console.log(err));
 async function main() {
